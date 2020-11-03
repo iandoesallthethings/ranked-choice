@@ -64,78 +64,6 @@
   }
 </script>
 
-<style>
-  main {
-    position: relative;
-  }
-  .list {
-    cursor: grab;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-  }
-  .item {
-    box-sizing: border-box;
-    display: inline-flex;
-    width: 100%;
-    min-height: 3em;
-    margin-bottom: 0.5em;
-    background-color: white;
-    border: 1px solid rgb(190, 190, 190);
-    border-radius: 2px;
-    user-select: none;
-  }
-  .item:last-child {
-    margin-bottom: 0;
-  }
-  .item:not(#grabbed):not(#ghost) {
-    z-index: 10;
-  }
-  .item > * {
-    margin: auto;
-  }
-  .buttons {
-    width: 32px;
-    min-width: 32px;
-    margin: auto 0;
-    display: flex;
-    flex-direction: column;
-  }
-  .buttons button {
-    cursor: pointer;
-    width: 18px;
-    height: 18px;
-    margin: 0 auto;
-    padding: 0;
-    border: 1px solid rgba(0, 0, 0, 0);
-    background-color: inherit;
-  }
-  .buttons button:focus {
-    border: 1px solid black;
-  }
-  .delete {
-    width: 32px;
-  }
-  #grabbed {
-    opacity: 0;
-  }
-  #ghost {
-    pointer-events: none;
-    z-index: -5;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-  }
-  #ghost * {
-    pointer-events: none;
-  }
-  #ghost.haunting {
-    z-index: 20;
-    opacity: 1;
-  }
-</style>
-
 <!-- All the documentation has to go up here, sorry.
      (otherwise it conflicts with the HTML or svelte/animate) 
      The .list has handlers for pointer movement and pointer up/release/end.
@@ -265,3 +193,76 @@
     {/each}
   </div>
 </main>
+
+<style>
+  main {
+    position: relative;
+  }
+  .list {
+    cursor: grab;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    box-sizing: border-box;
+    display: inline-flex;
+    width: 100%;
+    min-height: 3em;
+    margin-bottom: 0.5em;
+    background-color: white;
+    border: 1px solid rgb(190, 190, 190);
+    border-radius: 2px;
+    user-select: none;
+  }
+  .item:last-child {
+    margin-bottom: 0;
+  }
+  .item:not(#grabbed):not(#ghost) {
+    z-index: 10;
+  }
+  .item > * {
+    margin: auto;
+  }
+  .buttons {
+    display: none;
+    width: 32px;
+    min-width: 32px;
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .buttons button {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    margin: 0 auto;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-color: inherit;
+  }
+  .buttons button:focus {
+    border: 1px solid black;
+  }
+  .delete {
+    width: 32px;
+  }
+  #grabbed {
+    opacity: 0;
+  }
+  #ghost {
+    pointer-events: none;
+    z-index: -5;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  #ghost * {
+    pointer-events: none;
+  }
+  #ghost.haunting {
+    z-index: 20;
+    opacity: 1;
+  }
+</style>
