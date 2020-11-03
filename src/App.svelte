@@ -1,20 +1,13 @@
 <script>
   import DragDropList from "./DragDropList.svelte";
-
-  let candidates = [
-    "Donald J. Trump (R)",
-    "Joseph R. Biden (D)",
-    "Howie Hawkins (G)",
-    "Jo Jorgensen (L)",
-    "Kanye West (I)"
-  ];
-
-  let numberOfVoters = 5;
-  let ballots = new Array(numberOfVoters).fill(candidates.slice());
+  import { onMount } from "svelte";
 
   const sortByVotes = (a, b) => b.votes - a.votes;
   const filterCandidate = (list, toRemove) =>
     list.filter(candidate => candidate != toRemove);
+
+  const updateBallots = () =>
+    new Array(numberOfVoters).fill(candidates.slice());
 
   const countVotesForCandidate = (candidate, currentBallots) => {
     let votes = 0;
@@ -41,6 +34,19 @@
     // Call Next Round
     return calculateWinner(newCandidates, newBallots);
   };
+
+  let candidates = [
+    "Donald J. Trump (R)",
+    "Joseph R. Biden (D)",
+    "Howie Hawkins (G)",
+    "Jo Jorgensen (L)",
+    "Kanye West (I)"
+  ];
+
+  let numberOfVoters = 5;
+  let ballots = new Array(numberOfVoters).fill(candidates.slice());
+
+  onMount(() => (ballots = updateBallots()));
 </script>
 
 <style>
@@ -80,6 +86,13 @@
 
 <main>
   <h1>Ranked Choice Voting</h1>
+
+  <label for="numberOfVoters">Number Of Voters</label>
+  <input
+    id="numberOfVoters"
+    type="number"
+    bind:value={numberOfVoters}
+    on:change={() => (ballots = updateBallots())} />
 
   <h3>Winner: {calculateWinner(candidates, ballots)}</h3>
 
